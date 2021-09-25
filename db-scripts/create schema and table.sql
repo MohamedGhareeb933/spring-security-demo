@@ -1,0 +1,12 @@
+CREATE SCHEMA IF NOT EXISTS `spring-security`;
+
+USE `spring-security`;
+    
+CREATE TABLE IF NOT EXISTS `user`(
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+    `active` BIT DEFAULT NULL, 
+    `password` CHAR(68) DEFAULT NULL, 
+    `roles`VARCHAR(50) DEFAULT NULL,
+    `user_name` VARCHAR(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
