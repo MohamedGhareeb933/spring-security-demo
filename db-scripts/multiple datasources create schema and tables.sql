@@ -1,0 +1,9 @@
+CREATE SCHEMA IF NOT EXISTS `customer_demo`;
+
+USE `customer_demo`;
+
+CREATE TABLE IF NOT EXISTS `customer` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) DEFAULT NULL,
+    PRIMARY KEY(`id`)
+)ENGINE=InnoDB DEFAULT CHAR SET= latin1;
