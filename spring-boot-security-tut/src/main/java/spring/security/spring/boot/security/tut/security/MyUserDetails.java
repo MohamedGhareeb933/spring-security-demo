@@ -21,7 +21,6 @@ public class MyUserDetails implements UserDetails {
         userName = user.getUserName();
         password = user.getPassword();
         isActive = user.isActive();
-
         authorities = roles.stream().map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }

@@ -30,10 +30,11 @@ public class User {
     public User() {
     }
 
-    public User(boolean active, String password, String userName) {
+    public User(String userName, String password, boolean active, Collection<Role> roles) {
         this.userName = userName;
         this.password = password;
         this.active = active;
+        this.roles = roles;
     }
 
     public long getId() {
@@ -66,5 +67,13 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -1,6 +1,7 @@
 package spring.security.spring.boot.security.tut.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Table(name = "role")
 @Entity
@@ -12,6 +13,12 @@ public class Role {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Collection<User> users;
 
     public Role() {
     }

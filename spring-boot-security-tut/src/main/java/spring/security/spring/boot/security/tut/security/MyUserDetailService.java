@@ -10,7 +10,6 @@ import spring.security.spring.boot.security.tut.dao.UserRepository;
 import spring.security.spring.boot.security.tut.entity.Role;
 import spring.security.spring.boot.security.tut.entity.User;
 
-import javax.management.relation.RoleNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,14 +22,16 @@ public class MyUserDetailService  implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
         Optional<User> user = userRepository.findByUserName(userName);
-        List<Role> role = roleRepository.findAll();
+
+        List<Role> roles = roleRepository.findAllRolesByUsersUserName(userName);
 
         user.orElseThrow(() -> new UsernameNotFoundException(userName + " not found"));
 
-        return new MyUserDetails(user.get(), role);
+        return new MyUserDetails(user.get(), roles);
     }
 }
