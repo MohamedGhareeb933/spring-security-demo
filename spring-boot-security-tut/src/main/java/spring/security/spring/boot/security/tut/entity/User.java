@@ -5,34 +5,35 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "user")
-public class MyUser {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
-
-    @Column(name = "active")
-    private boolean active;
+    @Column(name = "username")
+    private String userName;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "roles")
-    private String roles;
+    @Column(name = "active")
+    private boolean active;
 
-    @Column(name = "user_name")
-    private String userName;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Collection<Role> roles;
 
-    public MyUser() {
+    public User() {
     }
 
-    public MyUser(boolean active, String password, String roles, String userName) {
-        this.active = active;
-        this.password = password;
-        this.roles = roles;
+    public User(boolean active, String password, String userName) {
         this.userName = userName;
+        this.password = password;
+        this.active = active;
     }
 
     public long getId() {
@@ -57,14 +58,6 @@ public class MyUser {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
     }
 
     public String getUserName() {

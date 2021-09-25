@@ -1,12 +1,11 @@
 package spring.security.spring.boot.security.tut.security;
 
-import antlr.CharScanner;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import spring.security.spring.boot.security.tut.entity.MyUser;
+import spring.security.spring.boot.security.tut.entity.Role;
+import spring.security.spring.boot.security.tut.entity.User;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,12 +17,12 @@ public class MyUserDetails implements UserDetails {
     private Boolean isActive;
     private List<GrantedAuthority> authorities;
 
-    public MyUserDetails(MyUser user) {
+    public MyUserDetails(User user, List<Role> roles) {
         userName = user.getUserName();
         password = user.getPassword();
         isActive = user.isActive();
-        authorities = Arrays.stream(user.getRoles().split(","))
-                .map(SimpleGrantedAuthority::new)
+
+        authorities = roles.stream().map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
 

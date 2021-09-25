@@ -20,10 +20,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(getPasswordEncoder());
+        auth.userDetailsService(userDetailsService);
     }
-
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -34,8 +32,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
                 .and().httpBasic().and().csrf().disable();
     }
 
-
     @Bean
-    public PasswordEncoder getPasswordEncoder() { return new BCryptPasswordEncoder(); }
+    public PasswordEncoder getPasswordEncoder() { return NoOpPasswordEncoder.getInstance(); }
+    //public PasswordEncoder getPasswordEncoder() { return new BCryptPasswordEncoder(); }
 
 }
