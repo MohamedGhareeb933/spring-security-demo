@@ -1,5 +1,6 @@
 package spring.security.spring.boot.security.tut.security;
 
+import antlr.CharScanner;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,12 +37,12 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return userName;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return password;
+        return userName;
     }
 
     @Override
